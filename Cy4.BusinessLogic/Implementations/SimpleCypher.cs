@@ -7,10 +7,24 @@ namespace Cy4.BusinessLogic.Implementations
     {
         private IDictionary<char, char> _characterParings;
         private int _defaultOffset;
+        private List<char> _lowerCaseChars;
+        private List<char> _upperCaseChars;
+        private List<char> _digitChars;
 
         public SimpleCypher()
         {
             _defaultOffset = 1;
+            _lowerCaseChars = new List<char>
+            {
+                'a','b','c','d','e','f','g','h','i','j','k','l','m',
+                'n','o','p','q','r','s','t','u','v','w','x','y','z'
+            };
+            _upperCaseChars = new List<char>
+            {
+                'A','B','C','D','E','F','G','H','I','J','K','L','M',
+                'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+            };
+            _digitChars = new List<char> { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
         }
 
         public string Encrypt(string value)
@@ -21,7 +35,10 @@ namespace Cy4.BusinessLogic.Implementations
 
             foreach(var character in value)
             {
-                newValue += _characterParings[character];
+                if (char.IsLetterOrDigit(character))
+                    newValue += _characterParings[character];
+                else
+                    newValue += character;
             }
 
             return newValue;
@@ -40,37 +57,19 @@ namespace Cy4.BusinessLogic.Implementations
 
         private void CreateEncryptionDict()
         {
-            CreateUpperCasePairings();
-            CreateLowerCasePairings();
+            CreatePairingsFor(_lowerCaseChars, _defaultOffset);
+            CreatePairingsFor(_upperCaseChars, _defaultOffset);
+            CreatePairingsFor(_digitChars, _defaultOffset);
         }
 
-        private void CreateLowerCasePairings()
+        private void CreatePairingsFor(List<char> characterSet, int offset)
         {
-            var lowerCaseChars = new List<char>
-            {
-                'a','b','c','d','e','f','g','h','i','j','k','l','m',
-                'n','o','p','q','r','s','t','u','v','w','x','y','z'
-            };
+            var maxIndex = characterSet.Count - 1;
 
-            for (int i = 0; i < 26; i++)
+            for (int i = 0; i < characterSet.Count; i++)
             {
-                var pairIndex = GetPairIndex(i, 1, 25);
-                _characterParings.Add(lowerCaseChars[i], lowerCaseChars[pairIndex]);
-            }
-        }
-
-        private void CreateUpperCasePairings()
-        {
-            var upperCaseChars = new List<char>
-            {
-                'A','B','C','D','E','F','G','H','I','J','K','L','M',
-                'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
-            };
-
-            for (int i = 0; i < 26; i++)
-            {
-                var pairIndex = GetPairIndex(i, 1, 25);
-                _characterParings.Add(upperCaseChars[i], upperCaseChars[pairIndex]);
+                var pairIndex = GetPairIndex(i, offset, maxIndex);
+                _characterParings.Add(characterSet[i], characterSet[pairIndex]);
             }
         }
 
