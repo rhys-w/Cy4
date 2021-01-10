@@ -6,6 +6,7 @@ Pet project to demonstrate some simple coding principles
 - C#
 - Unit testing
   - NUnit
+  - TDD (Test Driven Development)
 - DI (with interfaced cypher implementations)
 - Separation of concerns
   - UI and business logic being separate
