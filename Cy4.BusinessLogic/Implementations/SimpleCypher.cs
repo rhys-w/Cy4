@@ -46,7 +46,19 @@ namespace Cy4.BusinessLogic.Implementations
 
         public string Decrypt(string value)
         {
-            throw new System.NotImplementedException();
+            var newValue = "";
+            ResetDict();
+            CreateDecryptionDict();
+
+            foreach(var character in value)
+            {
+                if (char.IsLetterOrDigit(character))
+                    newValue += _characterParings[character];
+                else
+                    newValue += character;
+            }
+
+            return newValue;
         }
 
         private void ResetDict()
@@ -60,6 +72,13 @@ namespace Cy4.BusinessLogic.Implementations
             CreatePairingsFor(_lowerCaseChars, _defaultOffset);
             CreatePairingsFor(_upperCaseChars, _defaultOffset);
             CreatePairingsFor(_digitChars, _defaultOffset);
+        }
+
+        private void CreateDecryptionDict()
+        {
+            CreatePairingsFor(_lowerCaseChars, _defaultOffset * -1);
+            CreatePairingsFor(_upperCaseChars, _defaultOffset * -1);
+            CreatePairingsFor(_digitChars, _defaultOffset * -1);
         }
 
         private void CreatePairingsFor(List<char> characterSet, int offset)
@@ -77,9 +96,12 @@ namespace Cy4.BusinessLogic.Implementations
         {
             var pairIndex = currentIndex + offset;
 
-            while (pairIndex > maxIndex)
+            while (pairIndex > maxIndex || pairIndex < 0)
             {
-                pairIndex -= maxIndex + 1;
+                if (pairIndex > maxIndex)
+                    pairIndex -= maxIndex + 1;
+                else
+                    pairIndex += maxIndex + 1;
             }
 
             return pairIndex;
