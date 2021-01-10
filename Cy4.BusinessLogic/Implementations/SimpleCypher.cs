@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 namespace Cy4.BusinessLogic.Implementations
 {
+    /// <summary>
+    /// Simple Cypher
+    /// Shifts characters and numbers by 1
+    /// - Numbers: +1
+    /// - Characters: One letter further in the alphabent (retains case)
+    /// </summary>
     public class SimpleCypher : ICypher
     {
         private IDictionary<char, char> _characterParings;
