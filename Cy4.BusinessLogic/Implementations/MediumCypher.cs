@@ -9,7 +9,7 @@ namespace Cy4.BusinessLogic.Implementations
     /// Starts with a 1 offset
     /// Shifts characters by offset
     /// Shifts numbers by offset
-    /// When it reads a character, offset is increased by the number read
+    /// When it reads a number character, offset is increased by the number read
     /// Characters retains
     /// </summary>
     public class MediumCypher : ICypher
@@ -22,7 +22,7 @@ namespace Cy4.BusinessLogic.Implementations
 
         public MediumCypher()
         {
-            _offset = 1;
+            _offset = DefaultOffset();
             _lowerCaseChars = new List<char>
             {
                 'a','b','c','d','e','f','g','h','i','j','k','l','m',
@@ -36,25 +36,28 @@ namespace Cy4.BusinessLogic.Implementations
             _digitChars = new List<char> { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
         }
 
+        private int DefaultOffset() => 1;
+
         public string Encrypt(string value)
         {
             var newValue = "";
+            _offset = DefaultOffset();
             ResetDict();
             CreateEncryptionDict();
 
             foreach (var character in value)
             {
+                if (char.IsLetterOrDigit(character))
+                    newValue += _characterParings[character];
+                else
+                    newValue += character;
+
                 if (char.IsDigit(character))
                 {
                     _offset += int.Parse(character.ToString());
                     ResetDict();
                     CreateEncryptionDict();
                 }
-
-                if (char.IsLetterOrDigit(character))
-                    newValue += _characterParings[character];
-                else
-                    newValue += character;
             }
 
             return newValue;
@@ -62,7 +65,27 @@ namespace Cy4.BusinessLogic.Implementations
 
         public string Decrypt(string value)
         {
-            throw new NotImplementedException();
+            var newValue = "";
+            _offset = DefaultOffset();
+            ResetDict();
+            CreateDecryptionDict();
+
+            foreach (var character in value)
+            {
+                if (char.IsLetterOrDigit(character))
+                    newValue += _characterParings[character];
+                else
+                    newValue += character;
+
+                if (char.IsDigit(character))
+                {
+                    _offset += int.Parse(_characterParings[character].ToString());
+                    ResetDict();
+                    CreateDecryptionDict();
+                }
+            }
+
+            return newValue;
         }
 
         private void ResetDict()
@@ -78,12 +101,12 @@ namespace Cy4.BusinessLogic.Implementations
             CreatePairingsFor(_digitChars, _offset);
         }
 
-        //private void CreateDecryptionDict()
-        //{
-        //    CreatePairingsFor(_lowerCaseChars, _defaultOffset * -1);
-        //    CreatePairingsFor(_upperCaseChars, _defaultOffset * -1);
-        //    CreatePairingsFor(_digitChars, _defaultOffset * -1);
-        //}
+        private void CreateDecryptionDict()
+        {
+            CreatePairingsFor(_lowerCaseChars, _offset * -1);
+            CreatePairingsFor(_upperCaseChars, _offset * -1);
+            CreatePairingsFor(_digitChars, _offset * -1);
+        }
 
         private void CreatePairingsFor(List<char> characterSet, int offset)
         {

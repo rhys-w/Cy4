@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Cy4.ConsoleUI": {
+      "commandName": "Project",
+      "commandLineArgs": "Medium Encrypt The message I want to encrypt"
+      //"commandLineArgs": "Medium Encrypt On this date, 29/01/2021, we should meet by the old oak tree"
+    }
+  }
+}

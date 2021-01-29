@@ -18,10 +18,12 @@ namespace Cy4.BusinessLogic.Tests.Implementations
 
         #region Other
 
+        [TestCase("A1B2C3")]
         [TestCase("ABCDEF")]
         [TestCase("abcefjgogh")]
         [TestCase("djn1to8yycj0i1e0")]
         [TestCase("h1th089)*H1j01tg")]
+        [TestCase("A8A8A8A8A")]
         public void Decrypt_ShouldReturnTheOriginalValueBeforeEncrypt(string original)
         {
             // Test

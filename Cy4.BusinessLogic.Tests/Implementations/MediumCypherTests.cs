@@ -51,7 +51,7 @@ namespace Cy4.BusinessLogic.Tests.Implementations
             Assert.AreEqual(expectedValue, actualValue);
         }
 
-        [TestCase("ABC1ABC", "BCD3CDE")]
+        [TestCase("ABC1ABC", "BCD2CDE")]
         public void Encrypt_ShouldIncreaseOffsetWhenItReadsANumber(string unencryptedValue, string expectedValue)
         {
             // Test
@@ -61,8 +61,8 @@ namespace Cy4.BusinessLogic.Tests.Implementations
             Assert.AreEqual(expectedValue, actualValue);
         }
 
-        [TestCase("111111", "345678")]
-        [TestCase("A8A8A8A8A", "B7J5R3Z1H")]
+        [TestCase("111111", "234567")]
+        [TestCase("A8A8A8A8A", "B9J7R5Z3H")]
         public void Encrypt_ShouldIncreaseWithEVeryNumberItReader(string unencryptedValue, string expectedValue)
         {
             // Test

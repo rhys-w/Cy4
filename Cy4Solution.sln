@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cy4.BusinessLogic", "Cy4.BusinessLogic\Cy4.BusinessLogic.csproj", "{29A1B996-084D-4D30-9531-F0A1785F4385}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cy4.BusinessLogic.Tests", "Cy4.BusinessLogic.Tests\Cy4.BusinessLogic.Tests.csproj", "{7D640EE4-D5A8-4943-9860-21B2DD02DC9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cy4.BusinessLogic.Tests", "Cy4.BusinessLogic.Tests\Cy4.BusinessLogic.Tests.csproj", "{7D640EE4-D5A8-4943-9860-21B2DD02DC9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cy4.ConsoleUI", "Cy4.ConsoleUI\Cy4.ConsoleUI.csproj", "{42CBF720-D914-4022-A9AE-F026211859AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7D640EE4-D5A8-4943-9860-21B2DD02DC9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D640EE4-D5A8-4943-9860-21B2DD02DC9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D640EE4-D5A8-4943-9860-21B2DD02DC9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42CBF720-D914-4022-A9AE-F026211859AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42CBF720-D914-4022-A9AE-F026211859AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42CBF720-D914-4022-A9AE-F026211859AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42CBF720-D914-4022-A9AE-F026211859AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
